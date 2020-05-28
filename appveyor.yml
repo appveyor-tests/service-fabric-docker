@@ -6,11 +6,6 @@ install:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/fix-service-fabric-docker.ps1'))
 
 test_script:
-- ps: $j1 = Start-Job -ScriptBlock { . "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\CleanCluster.ps1" }
-- ps: Receive-Job $j1
-
-- ps: $j2 = Start-Job -ScriptBlock { . "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1" }
-- ps: Receive-Job $j2
-
-- ps: $j3 = Start-Job -ScriptBlock { . "$ENV:ProgramFiles\Microsoft SDKs\Service Fabric\ClusterSetup\CleanCluster.ps1" }
-- ps: Receive-Job $j3
+- powershell "%ProgramFiles%\Microsoft SDKs\Service Fabric\ClusterSetup\CleanCluster.ps1"
+- powershell "%ProgramFiles%\Microsoft SDKs\Service Fabric\ClusterSetup\DevClusterSetup.ps1"
+- powershell "%ProgramFiles%\Microsoft SDKs\Service Fabric\ClusterSetup\CleanCluster.ps1"
